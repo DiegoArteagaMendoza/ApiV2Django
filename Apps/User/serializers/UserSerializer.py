@@ -1,4 +1,4 @@
-from ..models import UserModel as User
+from Apps.User.models.UserModel import User
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -7,7 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['id', 'user_name', 'user_last_name', 'user_email', 'user_phone', 'user_role', 'user_status']
+        fields = '__all__'
+        # fields = ['id', 'user_name', 'user_last_name', 'user_email', 'user_phone', 'user_role', 'user_status']
     
     def get_user_role(self, obj):
         return f'User role: {obj.user_role}'

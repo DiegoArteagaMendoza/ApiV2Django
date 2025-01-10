@@ -12,3 +12,6 @@ class Task(models.Model):
     
     def __str__(self):
         return f'Task: {self.task_name} - User assigned: {self.task_user} - Project assigned: {self.task_project}'
+    
+    class Meta:
+        db_table = 'tasks_table'

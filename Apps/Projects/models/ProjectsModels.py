@@ -10,3 +10,6 @@ class Project(models.Model):
     
     def __str__(self):
         return f'Project: {self.project_name}'
+    
+    class Meta:
+        db_table = 'projects_table'

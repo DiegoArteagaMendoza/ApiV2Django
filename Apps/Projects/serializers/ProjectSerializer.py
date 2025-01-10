@@ -1,4 +1,4 @@
-from ..models import ProjectsModels as Project
+from Apps.Projects.models.ProjectsModels import Project
 from rest_framework import serializers
 
 class ProjectSerializer(serializers.ModelSerializer):

@@ -13,3 +13,6 @@ class User(models.Model):
     
     def __str__(self):
         return f'User name: {self.user_name} {self.user_last_name} - User role: {self.user_role}'
+    
+    class Meta:
+        db_table = 'user_table'

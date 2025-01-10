@@ -1,10 +1,10 @@
-from ..models import TasksModels as Tasks
+from Apps.Tasks.models.TasksModels import Task
 from rest_framework import serializers
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tasks
+        model = Task
         fields = ['id', 'task_name', 'task_description', 'task_user', 'task_project']
         
     def create(self, validate_data):
-        return Tasks.objects.create(**validate_data)
+        return Task.objects.create(**validate_data)
