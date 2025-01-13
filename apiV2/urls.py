@@ -5,6 +5,7 @@ from Apps.Projects.urls import urls as ProjectsUrls
 from Apps.Tasks.urls import urls as TasksUrls
 from Apps.WorkTeams.urls import urls as WorkTeamUrls
 from Apps.login.urls import urls as LoginUrls
+from Apps.register.urls import urls as RegisterUrls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('project/', include(ProjectsUrls), name='project_urls'),
     path('tasks/', include(TasksUrls), name='tasks_urls'),
     path('workteam/', include(WorkTeamUrls), name='work_team_urls'),
-    path('login/', include(LoginUrls))
+    path('login/', include(LoginUrls)),
+    path('register/', include(RegisterUrls))
 ]

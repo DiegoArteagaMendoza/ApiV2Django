@@ -55,7 +55,8 @@ USER_APPS = [
     'Apps.Projects',
     'Apps.Tasks',
     'Apps.User',
-    'Apps.login'
+    'Apps.login',
+    'Apps.register'
 ]
 
 INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + USER_APPS
