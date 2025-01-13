@@ -1,5 +1,4 @@
 from Apps.User.serializers.UserSerializer import UserSerializer
-from Apps.User.models.UserModel import User
 from Apps.User.queryset.UserQuerySet import UserQuerySet
 from rest_framework.views import APIView
 from rest_framework.response import Response

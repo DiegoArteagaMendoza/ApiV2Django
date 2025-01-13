@@ -1,4 +1,5 @@
 from Apps.User.models.UserModel import User
+from Apps.User.serializers.UserSerializer import UserSerializer
 
 class UserQuerySet:
     
@@ -18,6 +19,8 @@ class UserQuerySet:
     # Post's
     @staticmethod
     def create_user(user_data):
+        if UserSerializer.validate_duplicate_user(user_data):
+            return False 
         return User.objects.create(**user_data)
     
     # Put's

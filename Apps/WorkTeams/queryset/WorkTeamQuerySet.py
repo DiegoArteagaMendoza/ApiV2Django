@@ -4,8 +4,7 @@ class WorkTeamQuerySet():
     # Get's
     @staticmethod
     def get_all_teams():
-        teams = WorkTeam.team_name.all()
-        return [f'Equipo: {team}' for team in teams]
+        return WorkTeam.objects.all()
 
     @staticmethod
     def get_team_by_id(work_team_id):

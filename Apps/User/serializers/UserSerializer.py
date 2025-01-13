@@ -17,8 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
         return "active" if obj.user_status == 1 else "not active"
 
     def validate_duplicate_user(self, data):
-        if User.objects.filter(user_email=data['user_email']).exists():
-            raise serializers.ValidationError("Email alredy exist")
+        if User.objects.filter(user_rut=data['user_rut']).exists():
+            raise serializers.ValidationError("Rut alredy exist")
         
         if User.objects.filter(user_phone=data['user_phone']).exists():
             raise serializers.ValidationError("Phone alredy exist")

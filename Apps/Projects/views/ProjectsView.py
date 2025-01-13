@@ -1,5 +1,4 @@
 from Apps.Projects.serializers.ProjectSerializer import ProjectSerializer
-from Apps.Projects.models.ProjectsModels import Project
 from Apps.Projects.queryset.ProjectQuerySet import ProjectQuerySet
 from rest_framework.views import APIView
 from rest_framework.response import Response
