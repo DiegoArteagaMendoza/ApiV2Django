@@ -12,7 +12,7 @@ class User(models.Model):
     user_status = models.IntegerField(default=1) # 1 = active, 0 = not active
     
     def __str__(self):
-        return f'User name: {self.user_name} {self.user_last_name} - User role: {self.user_role}'
+        return f'{self.user_name} {self.user_last_name} - {self.user_role}'
     
     class Meta:
         db_table = 'user_table'

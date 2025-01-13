@@ -11,10 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
         # fields = ['id', 'user_name', 'user_last_name', 'user_email', 'user_phone', 'user_role', 'user_status']
     
     def get_user_role(self, obj):
-        return f'User role: {obj.user_role}'
+        return f'{obj.user_role}'
     
     def get_user_status(self, obj):
-        return "User status: active" if obj.user_status == 1 else "User status: not active"
+        return "active" if obj.user_status == 1 else "not active"
 
     def validate_duplicate_user(self, data):
         if User.objects.filter(user_email=data['user_email']).exists():

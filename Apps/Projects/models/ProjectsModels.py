@@ -9,7 +9,7 @@ class Project(models.Model):
     project_start_date = models.DateField()
     
     def __str__(self):
-        return f'Project: {self.project_name}'
+        return f'{self.project_name}'
     
     class Meta:
         db_table = 'projects_table'
