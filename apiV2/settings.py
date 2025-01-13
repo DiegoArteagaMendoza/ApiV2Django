@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5500',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Application definition
 
@@ -41,6 +47,7 @@ BASE_APPS = [
 
 EXTERNAL_APPS = [
     'rest_framework',
+    'corsheaders',
 ]
 
 USER_APPS = [
@@ -60,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Asegúrate de agregar esta línea
+    'django.middleware.common.CommonMiddleware',  # Debe ir después de CorsMiddleware
 ]
 
 ROOT_URLCONF = 'apiV2.urls'
