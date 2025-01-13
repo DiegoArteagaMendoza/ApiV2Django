@@ -18,4 +18,4 @@ class WorkTeamSerializer(serializers.ModelSerializer):
     
     def get_team_members(self, obj):
         members = obj.team_members.all()
-        return [f'Miembro: {member.user_name}' for member in members]
+        return [f'Miembro: {member.user_name + ' ' + member.user_last_name}' for member in members]

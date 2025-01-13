@@ -35,6 +35,6 @@ def register(request):
                 user_role = userRole,
                 user_status = 1
             )
-            return redirect('user/list')
+            return redirect('/user/list')
         except:
             return HttpResponse("Usuario no creado")    
