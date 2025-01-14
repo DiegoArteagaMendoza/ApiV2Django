@@ -1,0 +1,45 @@
+USER RUTAS
+
+Listar usuarios: user/list
+Crear usuarios: user/create
+Buscar usuario: user/details/<id>
+Actualizar usuario: user/udpdate/<id>
+Eliminar usuario (actualizar estado): user/delete/<id>
+
+PROJECT RUTAS
+
+Listar proyectos: project/list
+Crear proyectos: project/create
+Busacr proyectos: project/details/<id>
+Actualizar proyectos: project/udpdate/<id>
+Eliminar proyectos: project/delete/<id>
+
+TASKS RUTAS
+
+Listar tareas: tasks/list
+Crear tareas: tasks/create
+Busacr tareas: tasks/details/<id>
+Actualizar tareas: tasks/udpdate/<id>
+Eliminar tareas: tasks/delete/<id>
+
+WORKTEAM RUTAS
+
+Listar workteam: workteam/list
+Crear workteam: workteam/create
+Busacr workteam: workteam/details/<id>
+Actualizar workteam: workteam/udpdate/<id>
+Eliminar workteam: workteam/delete/<id>
+
+LOGIN RUTAS
+
+Iniciar sesion: login/
+
+REGISTER RUTAS
+
+Registrarse: register/
+
+PDF'S RUTAS
+
+Descargar pdf usuarios: descarga-pdf/usuarios
+Descargar pdf tareas: descarga-pdf/tareas
+Descargar pdf proyectos: descarga-pdf/proyectos

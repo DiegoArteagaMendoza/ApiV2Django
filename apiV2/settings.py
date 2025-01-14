@@ -56,12 +56,14 @@ USER_APPS = [
     'Apps.Tasks',
     'Apps.User',
     'Apps.login',
-    'Apps.register'
+    'Apps.register',
+    'Apps.pdfMaker'
 ]
 
 INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + USER_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,8 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Asegúrate de agregar esta línea
-    'django.middleware.common.CommonMiddleware',  # Debe ir después de CorsMiddleware
 ]
 
 ROOT_URLCONF = 'apiV2.urls'

@@ -6,6 +6,7 @@ from Apps.Tasks.urls import urls as TasksUrls
 from Apps.WorkTeams.urls import urls as WorkTeamUrls
 from Apps.login.urls import urls as LoginUrls
 from Apps.register.urls import urls as RegisterUrls
+from Apps.pdfMaker.urls import urls as PdfUrls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('tasks/', include(TasksUrls), name='tasks_urls'),
     path('workteam/', include(WorkTeamUrls), name='work_team_urls'),
     path('login/', include(LoginUrls)),
-    path('register/', include(RegisterUrls))
+    path('register/', include(RegisterUrls)),
+    path('descarga-pdf/', include(PdfUrls)),
 ]
