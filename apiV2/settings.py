@@ -28,10 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5500',
+    "http://127.0.0.1:5500",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -62,7 +62,8 @@ USER_APPS = [
     'Apps.register',
     'Apps.pdfMaker',
     'Apps.ExcelMaker',
-    'Apps.logout'
+    'Apps.logout',
+    'Apps.token'
 ]
 
 INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + USER_APPS

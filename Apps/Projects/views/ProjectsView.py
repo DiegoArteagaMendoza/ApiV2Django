@@ -1,17 +1,19 @@
 from Apps.Projects.serializers.ProjectSerializer import ProjectSerializer
 from Apps.Projects.queryset.ProjectQuerySet import ProjectQuerySet
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def ObtenerProyectos(request):
     projects = ProjectQuerySet.get_all_projects()
     serializer = ProjectSerializer(projects, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def CrearProyecto(request):
     serializer = ProjectSerializer(data=request.data)
     if serializer.is_valid():
@@ -21,6 +23,7 @@ def CrearProyecto(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def VerProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
@@ -29,6 +32,7 @@ def VerProyecto(request, project_id):
     return Response({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def ActualizarProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
@@ -40,6 +44,7 @@ def ActualizarProyecto(request, project_id):
     return Response({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def EliminarProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
