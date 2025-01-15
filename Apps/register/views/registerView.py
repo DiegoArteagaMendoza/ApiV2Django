@@ -31,7 +31,7 @@ def register(request):
                 user_email = userEmail,
                 user_rut = userRut,
                 user_phone = userPhone,
-                user_password = userPassword,
+                user_password = make_password(userPassword),
                 user_role = userRole,
                 user_status = 1
             )

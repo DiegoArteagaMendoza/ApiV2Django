@@ -1,5 +1,5 @@
 from django.http import FileResponse
-from Apps.pdfMaker.PdfLogic.pdfGeneratos import generar_pdf_usuarios, generar_pdf_tareas, generar_pdf_proyectos
+from Apps.pdfMaker.PdfLogic.pdfGenerator import generar_pdf_usuarios, generar_pdf_tareas, generar_pdf_proyectos
 
 
 def descargar_pdf_usuarios(request):

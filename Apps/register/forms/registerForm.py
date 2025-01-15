@@ -2,10 +2,35 @@ from django import forms
 
 class RegisterForm(forms.Form):
     ROLES = [
-        ('Developer', 'Developer'),
-        ('QA', 'QA'),
-        ('GM', 'GM')
+        ('DEV', 'Desarrollador'),
+        ('QA', 'Quality Assurance'),
+        ('PM', 'Project Manager'),
+        ('UX', 'Diseñador de Experiencia de Usuario'),
+        ('UI', 'Diseñador de Interfaz de Usuario'),
+        ('PO', 'Product Owner'),
+        ('BA', 'Business Analyst'),
+        ('CTO', 'Chief Technology Officer'),
+        ('CEO', 'Chief Executive Officer'),
+        ('COO', 'Chief Operating Officer'),
+        ('HR', 'Recursos Humanos'),
+        ('SM', 'Scrum Master'),
+        ('DEVOPS', 'Ingeniero DevOps'),
+        ('SYS_ADMIN', 'Administrador de Sistemas'),
+        ('DBA', 'Administrador de Base de Datos'),
+        ('FRONTEND', 'Desarrollador Frontend'),
+        ('BACKEND', 'Desarrollador Backend'),
+        ('FULLSTACK', 'Desarrollador Fullstack'),
+        ('DS', 'Científico de Datos'),
+        ('DE', 'Ingeniero de Datos'),
+        ('ML', 'Ingeniero de Machine Learning'),
+        ('SUPPORT', 'Soporte Técnico'),
+        ('SECURITY', 'Especialista en Seguridad'),
+        ('MARKETING', 'Marketing'),
+        ('SALES', 'Ventas'),
+        ('CS', 'Éxito del Cliente'),
+        ('NS', 'No seleccionado')
     ]
+
     
     userName = forms.CharField(label='Nombre de usuario', max_length=50, required=True)
     userLastName = forms.CharField(label='Apellido', max_length=50, required=True)

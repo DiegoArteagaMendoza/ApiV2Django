@@ -47,6 +47,7 @@ BASE_APPS = [
 
 EXTERNAL_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -57,7 +58,8 @@ USER_APPS = [
     'Apps.User',
     'Apps.login',
     'Apps.register',
-    'Apps.pdfMaker'
+    'Apps.pdfMaker',
+    'Apps.ExcelMaker'
 ]
 
 INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + USER_APPS

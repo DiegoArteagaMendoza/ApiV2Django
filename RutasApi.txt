@@ -43,3 +43,10 @@ PDF'S RUTAS
 Descargar pdf usuarios: descarga-pdf/usuarios
 Descargar pdf tareas: descarga-pdf/tareas
 Descargar pdf proyectos: descarga-pdf/proyectos
+
+EXCEL'S RUTAS
+
+Descargar xlsx usuarios: descargar-xlsx/usuarios/
+Descargar xlsx tareas: descargar-xlsx/tareas/
+Descargar xlsx proyectos: descargar-xlsx/proyectos/
+Descargar xlsx equipos: descargar-xlsx/equipos/

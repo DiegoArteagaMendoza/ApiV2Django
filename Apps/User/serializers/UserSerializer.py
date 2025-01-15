@@ -1,5 +1,7 @@
 from Apps.User.models.UserModel import User
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
+from rest_framework.exceptions import ValidationError
 
 class UserSerializer(serializers.ModelSerializer):
     user_role = serializers.SerializerMethodField()
@@ -8,7 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        # fields = ['id', 'user_name', 'user_last_name', 'user_email', 'user_phone', 'user_role', 'user_status']
     
     def get_user_role(self, obj):
         return f'{obj.user_role}'
@@ -18,12 +19,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_duplicate_user(self, data):
         if User.objects.filter(user_rut=data['user_rut']).exists():
-            raise serializers.ValidationError("Rut alredy exist")
+            raise ValidationError("Rut already exists")
         
         if User.objects.filter(user_phone=data['user_phone']).exists():
-            raise serializers.ValidationError("Phone alredy exist")
+            raise ValidationError("Phone already exists")
         
         return data
     
     def create(self, validated_data):
-        return User.objects.create(**validated_data)
+        validated_data['user_password'] = make_password(validated_data['user_password'])
+        user = User.objects.create(**validated_data)
+        if user:
+            return user
+        else:
+            return None

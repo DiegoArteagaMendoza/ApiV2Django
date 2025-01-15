@@ -1,5 +1,6 @@
 from Apps.User.models.UserModel import User
 from Apps.User.serializers.UserSerializer import UserSerializer
+from django.contrib.auth.hashers import make_password
 
 class UserQuerySet:
     
@@ -21,6 +22,7 @@ class UserQuerySet:
     def create_user(user_data):
         if UserSerializer.validate_duplicate_user(user_data):
             return False 
+        user_data['user_password'] = make_password(user_data['user_password'])
         return User.objects.create(**user_data)
     
     # Put's

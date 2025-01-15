@@ -9,7 +9,8 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta:        
         model = Task
-        fields = ['id', 'task_name', 'task_description', 'user_name', 'project_name', 'task_status', 'team_name']        
+        fields = "__all__"
+        # fields = ['id', 'task_name', 'task_description', 'user_name', 'project_name', 'task_status', 'team_name']        
         
     def get_team_name(self, obj):
         return obj.task_team.team_name if obj.task_team else None

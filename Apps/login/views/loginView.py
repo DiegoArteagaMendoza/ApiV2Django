@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from Apps.login.forms.loginForm import LoginForm
 from Apps.User.models.UserModel import User
 from django.contrib.auth.hashers import check_password
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def login(request):
     title = 'Login'
     if request.method == 'GET':
@@ -21,7 +23,7 @@ def login(request):
             if user.user_status == 0:
                 return HttpResponse("Usuario no activo")
     
-            if user.user_password==password:
+            if check_password(password, user.user_password):
                 return redirect('/user/list')
             else:
                 return HttpResponse("Credenciales Incorrectas")
