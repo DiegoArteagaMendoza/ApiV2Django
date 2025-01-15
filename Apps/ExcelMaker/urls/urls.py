@@ -3,7 +3,7 @@ from Apps.ExcelMaker.views.ExcelView import descargar_xls_usuarios, descargar_xl
 
 urlpatterns = [
     path('usuarios/', descargar_xls_usuarios, name='descargar_xls_usuarios'),
-    path('tareas/', descargar_xls_tareas, name='descargar_xls_tareas'),
-    path('proyectos/', descargar_xls_proyectos, name='descargar_xls_proyectos'),
-    path('equipos/', descargar_xls_equipos, name='descargar_xls_equipos')
+    path('tareas/<str:fecha_inicio>/<str:fecha_fin>', descargar_xls_tareas, name='descargar_xls_tareas'),
+    path('proyectos/<str:fecha_inicio>/<str:fecha_fin>', descargar_xls_proyectos, name='descargar_xls_proyectos'),
+    path('equipos/<str:fecha_inicio>/<str:fecha_fin>', descargar_xls_equipos, name='descargar_xls_equipos')
 ]

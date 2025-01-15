@@ -4,18 +4,16 @@ from Apps.WorkTeams.queryset.WorkTeamQuerySet import WorkTeamQuerySet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
-# class WorkTeamListPostView(APIView):
-#     """
-#     Vista para manejar la lista de equipos (GET) y la creación de equipos (POST)
-#     """
-
-def ObtenerEquipos(self, request):
+@api_view(['GET'])
+def ObtenerEquipos(request):
     work_team = WorkTeamQuerySet.get_all_teams()
     serializer = WorkTeamSerializer(work_team, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-def CrearEquipo(self, request):
+@api_view(['POST'])
+def CrearEquipo(request):
     serializer = WorkTeamSerializer(data=request.data)
     if serializer.is_valid():
         work_team = serializer.save()
@@ -23,12 +21,8 @@ def CrearEquipo(self, request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class WorkTeamDetailView(APIView):
-#     """
-#     Vista para manejar la recuperación, actualización y eliminación de equipos
-#     """
-    
-def VerEquipo(self, request, work_team_id):
+@api_view(['GET'])
+def VerEquipo(request, work_team_id):
     work_team = WorkTeamQuerySet.get_team_by_id(work_team_id)
     if work_team:
         serializer = WorkTeamSerializer(work_team)
@@ -36,7 +30,8 @@ def VerEquipo(self, request, work_team_id):
     
     return Response({"Error":"Work team not found"}, status=status.HTTP_400_BAD_REQUEST)
 
-def ActualizarEquipo(self, request, work_team_id):
+@api_view(['PUT'])
+def ActualizarEquipo(request, work_team_id):
     work_team = WorkTeamQuerySet.get_team_by_id(work_team_id)
     if work_team:
         serializer = WorkTeamSerializer(work_team, data=request.data, partial=True)
@@ -48,7 +43,8 @@ def ActualizarEquipo(self, request, work_team_id):
     
     return "Team not found"
 
-def EliminarEquipo(self, request, work_team_id):
+@api_view(['DELETE'])
+def EliminarEquipo(request, work_team_id):
     work_team = WorkTeamQuerySet.get_team_by_id(work_team_id)
     if work_team:
         work_team.delete()

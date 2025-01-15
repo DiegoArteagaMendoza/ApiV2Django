@@ -21,6 +21,5 @@ class TaskSerializer(serializers.ModelSerializer):
     def get_project_name(self, obj):
         return obj.task_project.project_name if obj.task_project else None
    
-    
     def create(self, validate_data):
         return Task.objects.create(**validate_data)

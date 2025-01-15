@@ -3,3 +3,4 @@ djangorestframework==3.15.2
 django-cors-headers==4.6.0
 reportlab==4.2.5
 openpyxl==3.1.5
+djangorestframework_simplejwt==5.4.0

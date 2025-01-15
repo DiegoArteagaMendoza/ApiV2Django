@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
 
 @api_view(['GET'])
 def ObtenerUsuarios(request):
@@ -19,7 +20,7 @@ def CrearUsuario(request):
             serializer.validate_duplicate_user(serializer.validated_data)
             user = serializer.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
-        except serializer.ValidationError as e:
+        except ValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 

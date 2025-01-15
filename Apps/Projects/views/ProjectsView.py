@@ -3,18 +3,16 @@ from Apps.Projects.queryset.ProjectQuerySet import ProjectQuerySet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
-
-# class ProjectsListPostView(APIView):
-#     """
-#     Vista para manejar la lista de proyectos (GET) y la creación de un nuevo proyecto (POST).
-#     """
-def ObtenerProyectos(self, request):
+@api_view(['GET'])
+def ObtenerProyectos(request):
     projects = ProjectQuerySet.get_all_projects()
     serializer = ProjectSerializer(projects, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-def CrearProyecto(self, request):
+@api_view(['POST'])
+def CrearProyecto(request):
     serializer = ProjectSerializer(data=request.data)
     if serializer.is_valid():
         project = serializer.save()
@@ -22,19 +20,16 @@ def CrearProyecto(self, request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-# class ProjectDetailView(APIView):
-#     """
-#     Vista para manejar la recuperación, actualización y eliminación de un proyecto específico.
-#     """
-def VerProyecto(self, request, project_id):
+@api_view(['GET'])
+def VerProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
         serializer = ProjectSerializer(project)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
 
-def ActualizarProyecto(self, request, project_id):
+@api_view(['PUT'])
+def ActualizarProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
         serializer = ProjectSerializer(project, data=request.data, partial=True)
@@ -44,7 +39,8 @@ def ActualizarProyecto(self, request, project_id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response({"error": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
 
-def EliminarProyecto(self, request, project_id):
+@api_view(['DELETE'])
+def EliminarProyecto(request, project_id):
     project = ProjectQuerySet.get_projects_by_id(project_id)
     if project:
         project.delete()

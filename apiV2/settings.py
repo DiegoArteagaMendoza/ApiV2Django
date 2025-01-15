@@ -49,6 +49,8 @@ EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 USER_APPS = [
@@ -59,10 +61,17 @@ USER_APPS = [
     'Apps.login',
     'Apps.register',
     'Apps.pdfMaker',
-    'Apps.ExcelMaker'
+    'Apps.ExcelMaker',
+    'Apps.logout'
 ]
 
 INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + USER_APPS
+
+REST_FRAMEWORK = { 
+    'DEFAULT_AUTHENTICATION_CLASSES': ( 
+        'rest_framework_simplejwt.authentication.JWTAuthentication', 
+    ), 
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  
@@ -147,3 +156,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# modelo de usuario personalizado
+AUTH_USER_MODEL = "User.User"

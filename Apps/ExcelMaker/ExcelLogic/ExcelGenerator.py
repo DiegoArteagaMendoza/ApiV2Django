@@ -3,7 +3,7 @@ import openpyxl
 from openpyxl.styles import PatternFill, Font, Border, Side, Alignment
 import openpyxl.utils
 from openpyxl.worksheet.table import Table, TableStyleInfo
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from io import BytesIO
 from Apps.User.models.UserModel import User
 from Apps.Tasks.models.TasksModels import Task
@@ -12,10 +12,10 @@ from Apps.WorkTeams.models.WorkTeamModel import WorkTeam
 
 cell_border = Border(left=Side(border_style='thin'), right=Side(border_style='thin'), top=Side(border_style='thin'), bottom=Side(border_style='thin'))
 cell_alignment = Alignment(horizontal='center', vertical='center')
-cell_font = Font(bold=True, name="Times", size=12, color="FFFFFF")
+cell_font = Font(bold=True, size=12, color="FFFFFF")
 patternFill = PatternFill(start_color="000000", end_color="000000", fill_type="solid")
 # Estilo de la tabla
-style = TableStyleInfo(name="TableStyleMedium9", showFirstColumn=False, showLastColumn=False, showRowStripes=True, showColumnStripes=True)
+style = TableStyleInfo(name="TableStyleMedium9", showFirstColumn=False, showLastColumn=False, showRowStripes=False, showColumnStripes=False)
 
 # Ajustar ancho de columnas
 def ajustar_ancho_columna(a,b, ws):
@@ -66,32 +66,21 @@ def generar_xls_usuarios():
         
     # Definir el rango de la tabla
     tabla_range = f"C3:H{fila-1}"
-    
     # Crear la tabla
     table = Table(displayName="UsuariosTabla", ref=tabla_range)
-    
-
     table.tableStyleInfo = style
-    
-    # Aplicar el filtro a la tabla
-    ws.auto_filter.ref = tabla_range
-    
     # Agregar la tabla a la hoja
     ws.add_table(table)
-
     # Ajustar el ancho de las columnas
     ws = ajustar_ancho_columna(3,9,ws)
 
-    # Guardar el archivo en memoria
-    file_stream = BytesIO()
-    wb.save(file_stream)
-    file_stream.seek(0)  # Regresar al inicio del stream para leerlo
-
     # Devolver el archivo como una respuesta HTTP
-    response = FileResponse(file_stream, as_attachment=True, filename="usuarios.xlsx")
+    response = HttpResponse(content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=usuarios.xlsx'
+    wb.save(response)
     return response
 
-def generar_xlsx_tareas():
+def generar_xlsx_tareas(fecha_inicio, fecha_fin):
     wb = Workbook()
     ws = wb.active
     ws.title = "Listado Tareas"
@@ -109,7 +98,7 @@ def generar_xlsx_tareas():
         cell.alignment = cell_alignment
         
     # obtener todas las tareas
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(task_date_create__gte=fecha_inicio, task_date_create__lte=fecha_fin)
     # Escribir las tareas
     fila = 4
     for task in tasks:
@@ -128,28 +117,19 @@ def generar_xlsx_tareas():
     
     # Crear tabla
     table = Table(displayName="TareasTabla", ref=table_range)
-    
-    table.tableStyleInfo = style
-    
-    # Aplicar filto a tabla
-    ws.auto_filter.ref = table_range
-    
+    table.tableStyleInfo = style   
     # Agregar tabla a la hoja
     ws.add_table(table)
-    
     # Ajustar el ancho de las columnas
     ws = ajustar_ancho_columna(3,9,ws)
     
-    # Guardar el archivo en memoria
-    file_stream = BytesIO()
-    wb.save(file_stream)
-    file_stream.seek(0)
-    
+    response = HttpResponse(content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=tareas.xlsx'
+    wb.save(response)    
     # Devolver el archivo como respuesta HTTP
-    response = FileResponse(file_stream, as_attachment=True, filename="tareas.xlsx")
     return response
 
-def generar_xlsx_proyectos():
+def generar_xlsx_proyectos(fecha_inicio, fecha_fin):
     wb = Workbook()
     ws = wb.active
     ws.title = "Listado Proyectos"
@@ -162,7 +142,7 @@ def generar_xlsx_proyectos():
         cell.fill = header_fill
         cell.border = cell_border
         cell.alignment = cell_alignment
-    projects = Project.objects.all()
+    projects = Project.objects.filter(project_start_date__gte=fecha_inicio,project_start_date__lte=fecha_fin)
     
     fila = 4
     for project in projects:
@@ -175,19 +155,15 @@ def generar_xlsx_proyectos():
     table_range = f"C3:F{fila-1}"
     table = Table(displayName="ProyectosTabla", ref=table_range)
     table.tableStyleInfo = style
-    ws.auto_filter.ref = table_range
     ws.add_table(table)
-    
     ws = ajustar_ancho_columna(3,7,ws)
     
-    file_stream = BytesIO()
-    wb.save(file_stream)
-    file_stream.seek(0)
-    
-    response = FileResponse(file_stream, as_attachment=True, filename="proyectos.xlsx")
+    response = HttpResponse(content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=proyectos.xlsx'
+    wb.save(response)
     return response
 
-def generar_xlsx_equipos():
+def generar_xlsx_equipos(fecha_inicio, fecha_fin):
     wb = Workbook()
     ws = wb.active
     ws.title = "Listado Equipos de trabajo"
@@ -200,7 +176,7 @@ def generar_xlsx_equipos():
         cell.fill = header_fill
         cell.border = cell_border
         cell.alignment = cell_alignment
-    workteams = WorkTeam.objects.all()
+    workteams = WorkTeam.objects.filter(team_date_create__gte=fecha_inicio, team_date_create__lte=fecha_fin)
     
     fila = 4
     for workteam in workteams:
@@ -213,14 +189,10 @@ def generar_xlsx_equipos():
     table_range = f"C3:E{fila-1}"
     table = Table(displayName="EquiposTabla", ref=table_range)
     table.tableStyleInfo = style
-    ws.auto_filter.ref = table_range
     ws.add_table(table)
-    
     ws = ajustar_ancho_columna(3,6,ws)
     
-    file_stream = BytesIO()
-    wb.save(file_stream)
-    file_stream.seek(0)
-    
-    response = FileResponse(file_stream, as_attachment=True, filename="EquiposTrabajo.xlsx")
+    response = HttpResponse(content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=equipos.xlsx'
+    wb.save(response)
     return response

@@ -8,6 +8,7 @@ from Apps.login.urls import urls as LoginUrls
 from Apps.register.urls import urls as RegisterUrls
 from Apps.pdfMaker.urls import urls as PdfUrls
 from Apps.ExcelMaker.urls import urls as ExcelUrls
+from Apps.logout.urls import urls as LogoutUrls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,5 +19,6 @@ urlpatterns = [
     path('login/', include(LoginUrls)),
     path('register/', include(RegisterUrls)),
     path('descarga-pdf/', include(PdfUrls)),
-    path('descargar-xlsx/', include(ExcelUrls))
+    path('descargar-xlsx/', include(ExcelUrls)),
+    path('logout/', include(LogoutUrls)),
 ]
