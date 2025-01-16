@@ -7,6 +7,7 @@ class Project(models.Model):
     project_description = models.TextField()
     project_budget = models.IntegerField()
     project_start_date = models.DateField()
+    project_image = models.ImageField(upload_to="projectImages", null=True, blank=True)
     
     def __str__(self):
         return f'{self.project_name}'

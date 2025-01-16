@@ -12,6 +12,16 @@ def ObtenerProyectos(request):
     serializer = ProjectSerializer(projects, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def CrearProyecto(request):
+#     serializer = ProjectSerializer(data=request.data)
+#     if serializer.is_valid():
+#         project = serializer.save()
+#         return Response(ProjectSerializer(project).data, status=status.HTTP_201_CREATED)
+
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def CrearProyecto(request):
@@ -19,8 +29,10 @@ def CrearProyecto(request):
     if serializer.is_valid():
         project = serializer.save()
         return Response(ProjectSerializer(project).data, status=status.HTTP_201_CREATED)
-
+    
+    print(serializer.errors)  # Agrega esto para depurar
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

@@ -59,6 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, default=make_password("defaultpassword123"))
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
+    user_image = models.ImageField(upload_to="userImages", null=True, blank=True)
     
     objects = UserManager()
     

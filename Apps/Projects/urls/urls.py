@@ -1,6 +1,9 @@
 from django.urls import path
 from Apps.Projects.views import ProjectsView
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     # Ruta para obtener la lista de proyectos
     path('list/', ProjectsView.ObtenerProyectos, name='project_list'),
@@ -16,4 +19,4 @@ urlpatterns = [
 
     # Ruta para eliminar un proyecto específico
     path('delete/<int:project_id>/', ProjectsView.EliminarProyecto, name='project_delete'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
